@@ -4,25 +4,25 @@ import random
 import string
 
 # Dicas: [Palavras]
-palavras = {'Animal': ['formiga', 'peixe-boi', 'esquilo', 'jacare', 'jabuti', 'elefante', 'tigre', 'escorpiao', 'macaco', 'crocodilo', 'lesma', 'rinoceronte'],
-			'Cidade': ['tokyo', 'nova york', 'roma', 'las vegas', 'viena', 'moscou', 'viena', 'lisboa', 'punta del leste', 'buenos aires', 'paris'],
-			'Objeto': ['martelo', 'parafuso', 'marreta', 'chave', 'canivete', 'prego', 'caneta', 'copo'],
-			'Filme': ['o pequenino', 'transformers', 'it: a coisa', 'os mercenarios', 'motoqueiro fantasma', 'harry potter', 'missao impossivel'],
-			'Meio de Transporte': ['onibus', 'trem', 'aviao', 'barco', 'lancha', 'jet sky', 'carro', 'moto', 'skate', 'metro'],
-			'Eletronico': ['celular', 'video game', 'computador', 'camera digital', 'gps', 'notebook', 'tablet'],
-			'Pais': ['reino unido', 'portugal', 'argentina', 'brasil', 'estados unidos', 'australia', 'russia', 'mexico', 'canada', 'suecia'],
-			'Profissao': ['medico', 'carteiro', 'economista', 'programador', 'professor', 'veterinario'],
-			'Cor': ['laranja', 'azul celeste', 'violeta', 'roxo', 'branco', 'verde agua', 'amarelo ocre'],
-			'Roupa': ['blusa', 'camiseta', 'casaco', 'chapeu', 'gravata', 'chinelo', 'meia', 'terno', 'vestido']
+palavras = {'Animal': ['formiga', 'peixe-boi', 'esquilo', u'jacaré', 'jabuti', 'elefante', 'tigre', u'escorpião', 'macaco', 'crocodilo', 'lesma', 'rinoceronte', 'zebra', 'gato'],
+			'Cidade': ['tokyo', 'nova york', 'roma', 'las vegas', 'viena', 'moscou', 'viena', 'lisboa', 'punta del leste', 'buenos aires', 'paris', u'são paulo', u'amsterdã'],
+			'Objeto': ['martelo', 'parafuso', 'marreta', 'chave', 'canivete', 'prego', 'caneta', 'copo', u'lâmpada', 'cadeira', u'relógio'],
+			'Filme': ['o pequenino', 'transformers', 'it: a coisa', u'os mercenários', 'motoqueiro fantasma', 'harry potter', 'missao impossivel', 'o hobbit', u'senhor dos anéis'],
+			'Meio de Transporte': [u'ônibus', u'trêm', u'avião', 'barco', 'lancha', 'jet sky', 'carro', 'moto', 'skate', u'metrô'],
+			'Eletronico': ['celular', 'video game', 'computador', 'camera digital', 'gps', 'notebook', 'tablet', u'robô', 'smartphone'],
+			u'País': ['reino unido', 'portugal', 'argentina', 'brasil', 'estados unidos', 'australia', 'russia', u'méxico', 'canada', 'suecia', u'nova zelândia', u'crôacia', 'holanda'],
+			'Profissao': [u'médico', 'carteiro', 'economista', 'programador', 'professor', u'veterinário', 'bombeiro', 'jornalista', 'advogado', 'cobrador', 'ator'],
+			'Cor': ['laranja', 'azul celeste', 'violeta', 'roxo', 'branco', u'verde água', 'amarelo ocre', 'magenta'],
+			'Roupa': ['blusa', 'camiseta', 'casaco', u'chapéu', 'gravata', 'chinelo', 'meia', 'terno', 'vestido', u'tênis', 'cachecol']
 }
 
 letras = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
-acentos =  {'a': ['à', 'á', 'ã', 'ê'],
-			'e': ['è', 'é', 'ẽ', 'ê'],
-			'i': ['ì', 'í', 'ĩ', 'î'],
-			'o': ['ò', 'ó', 'õ', 'ô'],
-			'u': ['ù', 'ú', 'ũ', 'û']
+acentos =  {'a': [u'à', u'á', u'ã', u'â'],
+			'e': [u'è', u'é', u'ẽ', u'ê'],
+			'i': [u'ì', u'í', u'ĩ', u'î'],
+			'o': [u'ò', u'ó', u'õ', u'ô'],
+			'u': [u'ù', u'ú', u'ũ', u'û']
 }
 
 # Evitar repeticao de palavras
@@ -58,29 +58,59 @@ class Forca(object):
 		return palavra_oculta
 
 	def mostraLetra(self, letra):
-		n = 0		
-		for letras in self.palavra:
-			if letras == str(letra):
-				self.p_oculta[n] = str(letra)
-			n += 1
+		n = 0
+		if letra in acentos.keys():
+			for l in self.palavra:
+				for k, v in acentos.items():
+					if letra == k:
+						if l == k:
+							self.p_oculta[n] = str(letra)
+						else:
+							for a in v:
+								if a == l:
+									self.p_oculta[n] = a
+				n += 1
+		else:
+			for letras in self.palavra:
+				if letras == str(letra):
+					self.p_oculta[n] = str(letra)
+				n += 1
 
 	def checaLetra(self, letra):
 		if letra in letras:
 			if not letra in self.acertos and not letra in self.erros:
 				self.repetido = False
-
-				if str(letra) in self.palavra:
-					self.acertos.append(letra)
-					self.mostraLetra(letra)
-				
+				n = 0
+				if letra in acentos.keys():
+					for l in self.palavra:
+						for k, v in acentos.items():
+							if letra == k:
+								if l == k:
+									if n == 0:
+										self.acertos.append(letra)
+										self.mostraLetra(letra)
+										n += 1
+								else:
+									for a in v:
+										if a == l:
+											if n == 0:
+												self.acertos.append(letra)
+												self.mostraLetra(letra)
+												n += 1
+					if n == 0:
+						self.erros.append(letra)
 				else:
-					self.erros.append(letra)
+					if str(letra) in self.palavra:
+						self.acertos.append(letra)
+						self.mostraLetra(letra)
+					else:
+						self.erros.append(letra)
 			else:
 				self.repetido = True
 
 	def checaGameover(self):
 		oculta = ''
 		for letra in self.p_oculta:
-			oculta += str(letra)
+			oculta += letra
 		if oculta == self.palavra:
 			self.ganhou = True
