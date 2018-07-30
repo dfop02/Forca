@@ -1,6 +1,6 @@
 # Jogo da Forca
 
-Jogo da forca desenvolvido em python.
+Jogo da forca desenvolvido em python 2.7
 
 by: Dfop02
 
@@ -10,4 +10,3 @@ Bibliotecas usadas:
       time,
       random,
       pygame.
-  
