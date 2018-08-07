@@ -6,6 +6,7 @@ Jogo da forca desenvolvido em python 2.7 com pygame.
 * os
 * sys
 * time
+* string
 * random
 * pygame
 
