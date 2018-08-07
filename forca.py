@@ -1,6 +1,6 @@
 #-*- coding: utf-8 -*-
 
-# Version 1.1 #
+# Version 1.2 #
 
 import random
 import string
@@ -66,16 +66,34 @@ class Forca(object):
 				for k, v in acentos.items():
 					if letra == k:
 						if l == k:
-							self.p_oculta[n] = str(letra)
+							if self.dica == u'País' or self.dica == 'Cidade':
+								if n == 0 or self.p_oculta[n-1] == ' ':
+									self.p_oculta[n] = string.upper(str(letra))
+								else:
+									self.p_oculta[n] = str(letra)
+							else:
+								self.p_oculta[n] = str(letra)
 						else:
 							for a in v:
 								if a == l:
-									self.p_oculta[n] = a
+									if self.dica == u'País' or self.dica == 'Cidade':
+										if n == 0 or self.p_oculta[n-1] == ' ':
+											self.p_oculta[n] = string.upper(a)
+										else:
+											self.p_oculta[n] = a
+									else:
+										self.p_oculta[n] = a
 				n += 1
 		else:
 			for letras in self.palavra:
 				if letras == str(letra):
-					self.p_oculta[n] = str(letra)
+					if self.dica == u'País' or self.dica == 'Cidade':
+						if n == 0 or self.p_oculta[n-1] == ' ':
+							self.p_oculta[n] = string.upper(str(letra))
+						else:
+							self.p_oculta[n] = str(letra)
+					else:
+						self.p_oculta[n] = str(letra)
 				n += 1
 
 	def checaLetra(self, letra):
@@ -113,6 +131,6 @@ class Forca(object):
 	def checaGameover(self):
 		oculta = ''
 		for letra in self.p_oculta:
-			oculta += letra
+			oculta += string.lower(letra)
 		if oculta == self.palavra:
 			self.ganhou = True
