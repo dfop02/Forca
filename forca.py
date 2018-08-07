@@ -1,5 +1,7 @@
 #-*- coding: utf-8 -*-
 
+# Version 1.1 #
+
 import random
 import string
 
