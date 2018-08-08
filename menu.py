@@ -159,7 +159,6 @@ class Menu(object):
 					if event.button == 1:
 						if pygame.Rect(x+330, y+235, 140, 50).collidepoint(event.pos):
 							menu = False
-
 			self.jogo.checaGameover()
 			if self.jogo.perdeu:
 				self.desenha_jogo()
@@ -194,7 +193,6 @@ class Menu(object):
 						elif pygame.Rect(x-10, y+100, 140, 70).collidepoint(event.pos):
 							pygame.quit()
 							quit()
-
 			self.game_intro()
 			self.credit()
 			pygame.display.update()
