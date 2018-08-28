@@ -10,6 +10,18 @@ Jogo da forca desenvolvido em python 2.7 com pygame.
 * random
 * pygame
 
+### Como instalar
+
+Baixe o jogo usando:
+```
+git clone https://github.com/dfop02/Forca
+```
+Agora execute o instalador do jogo, usando:
+```
+sudo python install.py
+```
+Ao final será criado um atalho na área de trabalho, bom jogo!
+
 ### Autores
 
 * [Diogo Fernandes](https://github.com/dfop02)
