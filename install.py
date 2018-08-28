@@ -32,12 +32,14 @@ def setPythonFile():
 	exe = True
 	with open("menu.py", "r+") as py:
 		firstLine = py.readlines()
-		for lines in firstLine:
-			if lines in pythonExe:
+		for lines in firstLine:		
+			if not pythonExe == lines:
 				exe = False
+				firstLine.insert(0,pythonExe)
 				break
-		firstLine.insert(0,pythonExe)
-	if exe:
+			else:
+				break
+	if not exe:
 		with open("menu.py", "w") as py:
 			print "Adicionando comando ao arquivo .py"
 			py.writelines(firstLine)
