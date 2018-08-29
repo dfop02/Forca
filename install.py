@@ -4,10 +4,14 @@ from shutil import copy
 
 #################### IMPORTANT ####################
 
-# Main file to run your program
+# Principal arquivo do seu programa
 main = "menu.py"
-# Deps to download before start installing
+# Pacotes necessario para seu programa funcionar
 deps = ["string", "random", "pygame"]
+# Nome do seu programa (Nome do atalho na area de trabalho)
+name = "Jogo da Forca"
+# Comentario no atalho (Opicional)
+comment = "Jogo da Forca"
 
 ##################################################
 
@@ -30,7 +34,7 @@ def checkUser(path, root):
 def setPythonFile():
 	pythonExe = "#!/usr/bin/env python\n"
 	exe = True
-	with open("menu.py", "r+") as py:
+	with open(main, "r+") as py:
 		firstLine = py.readlines()
 		for lines in firstLine:		
 			if not pythonExe == lines:
@@ -40,8 +44,8 @@ def setPythonFile():
 			else:
 				break
 	if not exe:
-		with open("menu.py", "w") as py:
-			print "Adicionando comando ao arquivo .py"
+		with open(main, "w") as py:
+			print ("Adicionando comando ao arquivo .py")
 			py.writelines(firstLine)
 
 def turnRun(File):
@@ -63,6 +67,10 @@ def install(package):
 		try:
 			print (package + " nao instalado. Instalando...")
 			import pip
+			if float(pip.__version__) < 18.0:
+				print ("Seu pip esta desatualizado...")
+				print ("Atualizando seu pip do " + pip.__version__ + " para o 18.0")
+				os.system('sudo pip install -U pip')
 			os.system('sudo pip install ' + package)
 		except ImportError:
 			try:
@@ -83,26 +91,28 @@ def installDeps():
 
 def createShortcut(path, version, currentRoot):
 	os.chdir(currentRoot)
-	with open("Jogo da Forca.desktop", "w") as shortcut:
+	with open(name + ".desktop", "w") as shortcut:
 		shortcut.write("[Desktop Entry]\n")
 		shortcut.write("Version=" + version + "\n")
-		shortcut.write("Name=Jogo da Forca\n")
-		shortcut.write("Comment=jogo da forca\n")
+		shortcut.write("Name=" + name + "\n")
+		shortcut.write("Comment=" + comment + "\n")
 		shortcut.write("Exec=" + path + "/" + main + "\n")
 		shortcut.write("Icon=" + path + "/img/icon.png\n")
 		shortcut.write("Type=Application\n")
 		shortcut.write("Terminal=false")
 	try:
-		copy(getPath()+"/Jogo da Forca.desktop", os.path.expanduser('~/.local/share/applications'))
+		copy(getPath() + "/" + name + ".desktop", os.path.expanduser('~/.local/share/applications'))
 	except IOError as error:
 		print (error)
-	turnRun("Jogo da Forca.desktop")
+	turnRun(name + ".desktop")
 
 if __name__ == '__main__':
 	# Forca diretorio
 	forcaDir = getPath()
 	# Root diretorio
 	root = os.path.join(os.path.join(os.path.expanduser('~')), 'Área de Trabalho')
+	if not os.path.isdir(root):
+		root = os.path.join(os.path.join(os.path.expanduser('~')), 'Desktop')
 	# Corrige o root caso tente instalar por outro usuario...
 	currentRoot = checkUser(forcaDir, root)
 
