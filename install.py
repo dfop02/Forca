@@ -50,7 +50,7 @@ def setPythonFile():
 	with open(main, "r+") as py:
 		firstLine = py.readlines()
 		for lines in firstLine:		
-			if not pythonExe == lines:
+			if not python2Exe == lines or python3Exe == lines:
 				exe = False
 				if getPythonVersion() >= (3,0):
 					firstLine.insert(0,python3Exe)
