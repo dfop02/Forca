@@ -154,7 +154,7 @@ class Menu(object):
 					pygame.quit()
 					quit()
 				elif event.type == pygame.KEYDOWN:
-					self.jogo.checaLetra(string.lower(event.unicode))
+					self.jogo.checaLetra(str.lower(str(event.unicode)))
 				elif event.type == pygame.MOUSEBUTTONUP:
 					if event.button == 1:
 						if pygame.Rect(x+330, y+235, 140, 50).collidepoint(event.pos):
