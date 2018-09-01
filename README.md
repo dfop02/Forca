@@ -1,6 +1,7 @@
 ## Jogo da Forca
 
-Jogo da forca desenvolvido em python 2.7 com pygame.
+Jogo da forca desenvolvido em python com pygame.
+Funciona no Python 2.7+ e Python 3.4+
 
 ### Bibliotecas usadas
 * os
@@ -10,7 +11,7 @@ Jogo da forca desenvolvido em python 2.7 com pygame.
 * random
 * pygame
 
-### Como instalar - Linux
+### Como instalar - Linux Mint/Ubuntu (Testados)
 
 Baixe o jogo usando:
 ```
@@ -25,7 +26,7 @@ Ao final da instalação será criado um atalho na área de trabalho, bom jogo!
 ### Como instalar - Windows 7/10
 Baixe o jogo usando o link abaixo (os arquivos são os mesmos, exceto o install.py que foi adaptado para windows):
 ```
-https://mega.nz/#!PV0jGKgJ!QzTDcK3dQrfLDvRH9Vk9TT42RqZp5Cyg43jS7s5dFno
+https://mega.nz/#!bAlVSSia!nFhc4AMK3wqGkHEtKz7wq4FfCRd5RLmPQ23RmTGsUkw
 ```
 O jogo virá em um arquivo .zip, extraia na pasta que desejar e então execute o arquivo "install.py" (Basta clicar nele duas vezes)
 
