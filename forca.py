@@ -1,9 +1,8 @@
 #-*- coding: utf-8 -*-
 
-# Version 1.3 #
+# Version 1.4 #
 
-import random
-import string
+import random, string
 
 # Dicas: [Palavras]
 palavras = {'Animal': ['formiga', 'peixe-boi', 'esquilo', u'jacaré', 'jabuti', 'elefante', 'tigre', u'escorpião', 'macaco', 'crocodilo', 'lesma', 'rinoceronte', 'zebra', 'gato'],
@@ -43,7 +42,7 @@ class Forca(object):
 	def getPalavra(self):
 		palavra = ''
 		while(palavra not in escolhidos):
-			dica = random.choice(palavras.keys())
+			dica = random.choice(list(palavras.keys()))
 			for d, p in palavras.items():
 				if dica == d:
 					palavra = random.choice(p)
@@ -68,7 +67,7 @@ class Forca(object):
 						if l == k:
 							if self.dica == u'País' or self.dica == 'Cidade':
 								if n == 0 or self.p_oculta[n-1] == ' ':
-									self.p_oculta[n] = string.upper(str(letra))
+									self.p_oculta[n] = str.upper(str(letra))
 								else:
 									self.p_oculta[n] = str(letra)
 							else:
@@ -78,7 +77,7 @@ class Forca(object):
 								if a == l:
 									if self.dica == u'País' or self.dica == 'Cidade':
 										if n == 0 or self.p_oculta[n-1] == ' ':
-											self.p_oculta[n] = string.upper(a)
+											self.p_oculta[n] = str.upper(a)
 										else:
 											self.p_oculta[n] = a
 									else:
@@ -89,7 +88,7 @@ class Forca(object):
 				if letras == str(letra):
 					if self.dica == u'País' or self.dica == 'Cidade':
 						if n == 0 or self.p_oculta[n-1] == ' ':
-							self.p_oculta[n] = string.upper(str(letra))
+							self.p_oculta[n] = str.upper(str(letra))
 						else:
 							self.p_oculta[n] = str(letra)
 					else:
@@ -131,6 +130,6 @@ class Forca(object):
 	def checaGameover(self):
 		oculta = ''
 		for letra in self.p_oculta:
-			oculta += string.lower(letra)
+			oculta += str.lower(letra)
 		if oculta == self.palavra:
 			self.ganhou = True
